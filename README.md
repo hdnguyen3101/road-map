@@ -1,6 +1,6 @@
 ﻿# **ROADMAP STUDY**
 
-*Lộ trình này sẽ đi từ những kiến thức được tổng hợp từ [Jin](mailto:hdnguyen3101@gmail.com) trong quá trình học tập và làm việc tính đến thời điểm 2023. Nội dung bao gồm các kiến thức về Source version control (SVC), Virtualization (ảo hóa), Containerized, Continuous Integration và Continuous Delivery/Deployment (CI/CD), Configuration management (CM), Cloud Computing and Storage, Log solution (EFK), Database, Testing tool, Monitoring tools…*	
+>*Lộ trình này sẽ đi từ những kiến thức được tổng hợp từ [Jin](mailto:hdnguyen3101@gmail.com) trong quá trình học tập và làm việc tính đến thời điểm 2023. Nội dung bao gồm các kiến thức về Source version control (SVC), Virtualization (ảo hóa), Containerized, Continuous Integration và Continuous Delivery/Deployment (CI/CD), Configuration management (CM), Cloud Computing and Storage, Log solution (EFK), Database, Testing tool, Monitoring tools…*	
 
 **Bắt đầu thôi!**
 
@@ -142,8 +142,13 @@ Cả Vagrant và Docker đều có một thư viện khổng lồ gồm các "im
 Hầu như mọi tương tác với Vagrant đều được thực hiện thông qua giao diện dòng lệnh. Gõ lệnh *vagrant* từ Commandline sẽ liệt kê tất cả lệnh được dùng. Hãy chắc chắn rằng khi thực hiện lệnh phải ở cùng thư mục với Vagrantfile.
 ##### <a name="cheat_sheet_cli"></a>*Vagrant CLI Cheat Sheet*
 1. Creating the Vagrantfile
-   - Khởi tạo Vagrantfile với box "base" của Vagrant `vagrant init`
-   - Khởi tạo Vagrantfile với một box cụ thể. Ex: vagrant init ubuntu/trusty64 `vagrant init <box-name>`
+   - Khởi tạo Vagrantfile với box "base" của Vagrant 
+   
+   `vagrant init`
+
+   - Khởi tạo Vagrantfile với một box cụ thể. Ex: vagrant init ubuntu/trusty64 
+   
+   `vagrant init <box-name>`
 
 2. Staring a VM
    - Tạo và cấu hình máy ảo theo Vagrantfile 
@@ -186,6 +191,10 @@ Hầu như mọi tương tác với Vagrant đều được thực hiện thông
    - Dừng và xóa tất cả tài nguyên của máy ảo
 
    `vagrant destroy <name|id>` -- (-f hoặc --force sẽ xóa mà không cần xác nhận)
+
+   - Xóa box đã cài đặt
+
+   `vagrant box remove <name>`
 
 6. Boxes
    - Xem danh sách tất cả các box được cài đặt vào Vagrant trên máy tính
@@ -236,36 +245,65 @@ Hầu như mọi tương tác với Vagrant đều được thực hiện thông
 ##### <a name="cheat_sheet_file"></a>*Vagrantfile Cheat Sheet*
 - Port forwarding
 ```ruby
-#host:port >> guest:port
-zipi.vm.network "forwarded_port", host: 8080, guest: 80, auto_correct: true
+# Create a forwarded port mapping which allows access to a specific port
+# within the machine from a port on the host machine. In the example below,
+# accessing "localhost:8080" will access port 80 on the guest machine.
+# NOTE: This will enable public access to the opened port
+config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
 ```
 - Mount folders and permissions
 ```ruby
-zipi.vm.synced_folder ".", "/vagrant",
+# Share an additional folder to the guest VM. The first argument is
+# the path on the host to the actual folder. The second argument is
+# the path on the guest to mount the folder. And the optional third
+# argument is a set of non-required options.
+config.vm.synced_folder ".", "/vagrant",
   owner: "vagrant",
   group: "vagrant",
   mount_options: ["dmode=775,fmode=664"]
 ```
 - Network
 ```ruby
-zipi.vm.network "private_network",
+# Create a private network, which allows host-only access to the machine
+# using a specific IP.
+config.vm.network "private_network",
     ip: "192.168.32.10",
     virtualbox__intnet: true,
     auto_config: true
+
+# Create a public network, which generally matched to bridged network.
+# Bridged networks make the machine appear as another physical device on
+# your network.
+config.vm.network "public_network"
 ```
 - Provider
 ```ruby
+# Provider-specific configuration so you can fine-tune various
+# backing providers for Vagrant. These expose provider-specific options.
+# Example for VirtualBox:
+#
 config.vm.provider "virtualbox" do |vb|
-    vb.memory = 512
-    vb.cpus = 1
-    #vb.gui = true
+   # Display the VirtualBox GUI when booting the machine
+   vb.gui = true
+
+   # Customize the amount of memory on the VM:
+   vb.memory = "1024"
+
+   # Customize the number of CPUs on the VM:
+   vb.cpus = "2"
 end
 ```
 - Provisioning: inline
 
 Option 1:
 ```ruby
-config.vm.provision "shell", inline: "apt-get update && apt-get -y upgrade"
+# Enable provisioning with a shell script. Additional provisioners such as
+# Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
+# documentation for more information about their specific syntax and use.
+config.vm.provision "shell", inline: <<-SHELL
+   apt-get update
+   apt-get install -y apache2
+SHELL
 ```
 Option 2:
 ```ruby
@@ -278,51 +316,17 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: $script
 end
 ```
-- Provisioning: shell
-```ruby
-config.vm.provision :shell, :path => "vagrant-bootstrap.sh"
-```
-- Provisioning: ansible
-```ruby
-config.vm.provision "ansible" do |ansible|
-  ansible.playbook = "provision-ansible/install.yml"
-  
-  ansible.verbose = 'vvvv'
-  
-  ansible.host_key_checking = false
-  ansible.sudo = true
-    
-  ansible.tags = ['base', 'ansible']
-  #ansible.skip_tags = ''
-
-  # STATIC INVENTORY
-  #ansible.inventory_path = "provision-ansible/hosts/all"
-  #ansible.limit = 'vagrant'
-    
-  # AUTO-GENERATED INVENTORY
-  ansible.groups = {
-    "group1" => ["zipi"],
-    "all_groups:children" => ["group1"],
-    #"group1:vars" => { "vagrant_enable" => true }
-  }
-
-  ansible.extra_vars = {
-      ansible_ssh_user: 'vagrant',
-      vagrant_enable: true
-      }
-end
-```
 - Launching 2 machines
 ```ruby
 config.vm.define "zipi" do |zipi|
     zipi.vm.host_name = "zipi"
     zipi.vm.box = "ubuntu/trusty64"
-    zipi.vm.network "private_network", ip: "192.168.32.10", virtualbox__intnet:     true, auto_config: true
+    zipi.vm.network "private_network", ip: "192.168.32.10", virtualbox__intnet: true, auto_config: true
 end
 config.vm.define "zape" do |zape|
     zape.vm.host_name = "zape"
     zape.vm.box = "ubuntu/trusty64"
-    zape.vm.network "private_network", ip: "192.168.32.11", virtualbox__intnet:     true, auto_config: true
+    zape.vm.network "private_network", ip: "192.168.32.11", virtualbox__intnet: true, auto_config: true
 end
 ```
 #### <a name="vagrantfile"></a> <u>Vagrantfile</u>

@@ -389,6 +389,15 @@ config.vm.define "zape" do |zape|
    zape.vm.network "private_network", ip: "192.168.32.11", virtualbox__intnet: true, auto_config: true
 end
 ```
+## *&rarr;* Để có thể sử dụng Vagrant một cách cơ bản nhất, chúng ta chỉ cần tập trung vào các lệnh cơ bản sau:
+```shell
+vagrant init
+vagrant up
+vagrant ssh
+vagrant resume
+vagrant halt
+vagrant destroy
+```  
 - ### <a name="vmware-vsphere"></a>***(Advanced) VMware vSphere***
 
 

@@ -30,10 +30,6 @@ Dựa vào những đề mục, tôi sẽ hệ thống thứ tự các kiến th
    + [Kiến trúc Vagrant](#vagrant_architecture)
 
    + [Vagrant Commands (CLI)](#cli)
-      
-      - [Vagrant CLI Cheat Sheet](#cheat_sheet_cli)
-
-      - [Vagrantfile Cheat Sheet](#cheat_sheet_file)
 
    + [Vagrantfile](#vaagrantfile)
 
@@ -42,6 +38,12 @@ Dựa vào những đề mục, tôi sẽ hệ thống thứ tự các kiến th
    + [Providers](#providers)
 
    + [Provisioning](#provisioning)
+
+   + [Vagrant Cheat Sheet](#vagrant_cheat_sheet)
+            
+      - [Vagrant CLI Cheat Sheet](#cheat_sheet_cli)
+
+      - [Vagrantfile Cheat Sheet](#cheat_sheet_file)
 
 - [(Advanced) VMware vSphere](#vmware_vsphere)
 
@@ -140,6 +142,65 @@ Cả Vagrant và Docker đều có một thư viện khổng lồ gồm các "im
 
 #### <a name="cli"></a> <u>Vagrant Commands (CLI)</u>
 Hầu như mọi tương tác với Vagrant đều được thực hiện thông qua giao diện dòng lệnh. Gõ lệnh *vagrant* từ Commandline sẽ liệt kê tất cả lệnh được dùng. Hãy chắc chắn rằng khi thực hiện lệnh phải ở cùng thư mục với Vagrantfile.
+#### <a name="vagrantfile"></a> <u>Vagrantfile</u>
+Vagrant sử dụng file cấu hình có cú pháp là ngôn ngữ Ruby cơ bản để mô tả các môi trường được gọi là Vagrantfile. Tên của file cấu hình này phải đặt là Vagrantfile.
+
+Mỗi project, sử dụng 1 Vagrantfile để quản lý version hiệu quả, Vagrantfile hoàn toàn Flexible trên các nền tảng mà Vagrant hỗ trợ.
+
+Cơ chế quan trọng của Vagrant là **Load order và Merging,** khi chúng ta sử dụng các lệnh Vagrant, nó sẽ tìm các Vagrantfiles khác trên hệ thống và hợp nhất các file cài đặt có liên quan để xây dựng cấu hình cuối cùng. Ví dụ: Chúng ta có Vagrantfile trong thư mục chính tên Vagrant với một số cấu hình mặc định và ghi đè các giá trị dành riêng cho dự án trong mỗi thư mục dự án. *(Đoạn này tôi ít sử dụng, do các project đa phần đều làm cá nhân).* Lưu ý rằng nếu không tìm thấy Vagrantfile ở bất kỳ bước nào, Vagrant sẽ tiếp tục với bước tiếp theo.
+
+Vagrant có cơ chế Lookup Path, Vagrant sẽ duyệt cây thư mục để tìm Vagrantfile đầu tiên được tìm thấy, bắt đầu từ thư mục hiện tại khi thực hiện lệnh Vagrant bất kỳ.
+#### <a name="boxes"></a> <u>Boxes</u>
+Image của Vagrant được gọi là Vagrant box. Các box này đã được đánh phiên bản để có thể nhanh chóng clone một máy ảo. Có nhiều box được public trên [Vagrant Cloud](https://app.vagrantup.com/boxes/search). Tuy nhiên nên cẩn thận trong việc lựa chọn box, vì chỉ có 2 loại box được chính thức là [HashiCorp](https://app.vagrantup.com/hashicorp) và [Bento](https://app.vagrantup.com/bento) boxes.
+#### <a name="providers"></a> <u>Providers</u>
+Vagrant hỗ trợ nhiều nhà cung cấp máy ảo khác nhau, nhưng các nhà cung cấp này không được cài đặt sẵn. Các nhà cung cấp này có thể được cài đặt thông qua plugin. Các nhà cung cấp được hỗ trợ bởi Vagrant bao gồm: VirtualBox, VMware, Hyper-V, Docker, AWS, Azure, Google Cloud Platform, DigitalOcean, Linode, và nhiều hơn nữa. Nhà cung cấp mặc định là Virtualbox.
+Các mức độ ưu tiên lựa chọn nhà cung cấp:
+1. Option --provider trong lệnh vagrant up.
+Ex: `vagrant up --provider=vmware_fusion`
+2. Biến môi trường `VAGRANT_DEFAULT_PROVIDER`
+3. Cấu hình trong Vagrantfile
+```ruby
+Vagrant.configure("2") do |config|
+  # ... other config up here
+
+  # Prefer VMware Fusion before VirtualBox
+  config.vm.provider "vmware_fusion"
+  config.vm.provider "virtualbox"
+end
+```
+4. Vagrant sẽ tự động chọn nhà cung cấp đầu tiên được cài đặt. Nếu không có nhà cung cấp nào được cài đặt, Vagrant sẽ báo lỗi.
+#### <a name="provisioning"></a> <u>Provisioning</u>
+Provisioners trong Vagrant cho phép người dùng cài đặt các phần mềm trên máy ảo và thực hiện các tác vụ cấu hình. Vagrant hỗ trợ nhiều loại provisioners khác nhau, bao gồm: shell, Chef, Puppet, Ansible, Salt, Docker, File, và một số loại provisioners khác. Provisioners có thể được cấu hình trong Vagrantfile.
+Provisioning có thể được chạy trong các trường hợp:
+- Trong quá trình khởi tạo máy ảo. Trong lần `vagrant up` đầu tiên, Vagrant sẽ chạy tất cả các provisioners được cấu hình. Nếu máy ảo đã được tạo trước đó, Vagrant sẽ bỏ qua các provisioners trừ khi được chỉ định option `--provision`. Ex: `vagrant up --provision`
+- Trong quá trình khởi động lại máy ảo. Provisioning sẽ được chạy khi chúng ta sử dụng lệnh `vagrant reload --provision`
+- Trong trường hợp được cấu hình trong Vagrantfile. Ex:
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.provision "shell", inline: "echo hello",
+    run: "always"
+end
+```
+
+Có thể cấu hình provisioners trong Vagrantfile:
+```ruby
+Vagrant.configure("2") do |config|
+  # ... other configuration
+
+  config.vm.provision "shell", inline: "echo hello"
+end
+```
+hoặc có thể sử dụng biến để lưu trữ các script theo syntax của ngôn ngữ Ruby:
+```ruby
+Vagrant.configure("2") do |config|
+  # ... other configuration
+
+  config.vm.provision "shell" do |s|
+    s.inline = "echo hello"
+  end
+end
+```
+### <a name="vagrant_cheat_sheet"></a> <u>Vagrant Cheat Sheet</u>
 ##### <a name="cheat_sheet_cli"></a>*Vagrant CLI Cheat Sheet*
 1. Creating the Vagrantfile
    - Khởi tạo Vagrantfile với box "base" của Vagrant 
@@ -268,7 +329,6 @@ config.vm.synced_folder ".", "/vagrant",
 # using a specific IP.
 config.vm.network "private_network",
     ip: "192.168.32.10",
-    virtualbox__intnet: true,
     auto_config: true
 
 # Create a public network, which generally matched to bridged network.
@@ -319,28 +379,16 @@ end
 - Launching 2 machines
 ```ruby
 config.vm.define "zipi" do |zipi|
-    zipi.vm.host_name = "zipi"
-    zipi.vm.box = "ubuntu/trusty64"
-    zipi.vm.network "private_network", ip: "192.168.32.10", virtualbox__intnet: true, auto_config: true
+   zipi.vm.host_name = "zipi"
+   zipi.vm.box = "ubuntu/trusty64"
+   zipi.vm.network "private_network", ip: "192.168.32.10", virtualbox__intnet: true, auto_config: true
 end
 config.vm.define "zape" do |zape|
-    zape.vm.host_name = "zape"
-    zape.vm.box = "ubuntu/trusty64"
-    zape.vm.network "private_network", ip: "192.168.32.11", virtualbox__intnet: true, auto_config: true
+   zape.vm.host_name = "zape"
+   zape.vm.box = "ubuntu/trusty64"
+   zape.vm.network "private_network", ip: "192.168.32.11", virtualbox__intnet: true, auto_config: true
 end
 ```
-#### <a name="vagrantfile"></a> <u>Vagrantfile</u>
-Vagrant sử dụng file cấu hình có cú pháp là ngôn ngữ Ruby cơ bản để mô tả các môi trường được gọi là Vagrantfile. Tên của file cấu hình này phải đặt là Vagrantfile.
-
-Mỗi project, sử dụng 1 Vagrantfile để quản lý version hiệu quả, Vagrantfile hoàn toàn Flexible trên các nền tảng mà Vagrant hỗ trợ.
-
-Cơ chế quan trọng của Vagrant là **Load order và Merging,** khi chúng ta sử dụng các lệnh Vagrant, nó sẽ tìm các Vagrantfiles khác trên hệ thống và hợp nhất các file cài đặt có liên quan để xây dựng cấu hình cuối cùng. Ví dụ: Chúng ta có Vagrantfile trong thư mục chính tên Vagrant với một số cấu hình mặc định và ghi đè các giá trị dành riêng cho dự án trong mỗi thư mục dự án. *(Đoạn này tôi ít sử dụng, do các project đa phần đều làm cá nhân).* Lưu ý rằng nếu không tìm thấy Vagrantfile ở bất kỳ bước nào, Vagrant sẽ tiếp tục với bước tiếp theo.
-
-Vagrant có cơ chế Lookup Path, Vagrant sẽ duyệt cây thư mục để tìm Vagrantfile đầu tiên được tìm thấy, bắt đầu từ thư mục hiện tại khi thực hiện lệnh Vagrant bất kỳ.
-#### <a name="boxes"></a> <u>Boxes</u>
-Image của Vagrant được gọi là Vagrant box. Các box này đã được đánh phiên bản để có thể nhanh chóng clone một máy ảo. Có nhiều box được public trên [Vagrant Cloud](https://app.vagrantup.com/boxes/search). Tuy nhiên nên cẩn thận trong việc lựa chọn box, vì chỉ có 2 loại box được chính thức là [HashiCorp](https://app.vagrantup.com/hashicorp) và [Bento](https://app.vagrantup.com/bento) boxes.
-#### <a name="providers"></a> <u>Providers</u>
-#### <a name="provisioning"></a> <u>Provisioning</u>
 - ### <a name="vmware-vsphere"></a>***(Advanced) VMware vSphere***
 
 

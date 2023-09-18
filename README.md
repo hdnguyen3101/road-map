@@ -23,27 +23,27 @@ Dựa vào những đề mục, tôi sẽ hệ thống thứ tự các kiến th
 
 - [Vagrant](VIRTUALIZATION/Vagrant/vagrant.md)
 
-   + [Vagrant là gì?](VIRTUALIZATION/Vagrant/vagrant_overview.md)
+   + [Vagrant là gì?](VIRTUALIZATION/Vagrant/vagrant.md#vagrant_overview)
 
-   + [Vagrant vs. Docker](VIRTUALIZATION/Vagrant/vagrant_vs_docker.md)
+   + [Vagrant vs. Docker](VIRTUALIZATION/Vagrant/vagrant.md#vagrant_vs_docker)
 
-   + [Kiến trúc Vagrant](VIRTUALIZATION/Vagrant/vagrant_architecture.md)
+   + [Kiến trúc Vagrant](VIRTUALIZATION/Vagrant/vagrant.md#vagrant_architecture)
 
-   + [Vagrant Commands (CLI)](VIRTUALIZATION/Vagrant/cli.md)
+   + [Vagrant Commands (CLI)](VIRTUALIZATION/Vagrant/vagrant.md#cli)
 
-   + [Vagrantfile](VIRTUALIZATION/Vagrant/vagrantfile.md)
+   + [Vagrantfile](VIRTUALIZATION/Vagrant/vagrant.md#vagrantfile)
 
-   + [Boxes](VIRTUALIZATION/Vagrant/boxes.md)
+   + [Boxes](VIRTUALIZATION/Vagrant/vagrant.md#boxes)
 
-   + [Providers](VIRTUALIZATION/Vagrant/providers.md)
+   + [Providers](VIRTUALIZATION/Vagrant/vagrant.md#providers)
 
-   + [Provisioning](VIRTUALIZATION/Vagrant/provisioning.md)
+   + [Provisioning](VIRTUALIZATION/Vagrant/vagrant.md#provisioning)
 
-   + [Vagrant Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md)
+   + [Vagrant Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant.md#vagrant_cheat_sheet)
             
-      - [Vagrant CLI Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md#vagrant-cli-cheat-sheet)
+      - [Vagrant CLI Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant.md#vagrant-cli-cheat-sheet)
 
-      - [Vagrantfile Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md#vagrant-cli-cheat-sheet)
+      - [Vagrantfile Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant.md#vagrant-cli-cheat-sheet)
 
 - [(Advanced) VMware vSphere](#vmware_vsphere)
 

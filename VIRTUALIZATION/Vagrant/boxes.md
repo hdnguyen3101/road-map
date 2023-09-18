@@ -1,2 +1,2 @@
-### <a name="boxes"></a> <u>Boxes</u>
+## <a name="boxes"></a> <u>Boxes</u>
 Image của Vagrant được gọi là Vagrant box. Các box này đã được đánh phiên bản để có thể nhanh chóng clone một máy ảo. Có nhiều box được public trên [Vagrant Cloud](https://app.vagrantup.com/boxes/search). Tuy nhiên nên cẩn thận trong việc lựa chọn box, vì chỉ có 2 loại box được chính thức là [HashiCorp](https://app.vagrantup.com/hashicorp) và [Bento](https://app.vagrantup.com/bento) boxes.

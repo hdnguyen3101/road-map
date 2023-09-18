@@ -41,9 +41,9 @@ Dựa vào những đề mục, tôi sẽ hệ thống thứ tự các kiến th
 
    + [Vagrant Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md)
             
-      - [Vagrant CLI Cheat Sheet](#cheat_sheet_cli)
+      - [Vagrant CLI Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md#vagrant-cli-cheat-sheet)
 
-      - [Vagrantfile Cheat Sheet](#cheat_sheet_file)
+      - [Vagrantfile Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md#vagrant-cli-cheat-sheet)
 
 - [(Advanced) VMware vSphere](#vmware_vsphere)
 

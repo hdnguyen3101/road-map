@@ -1,4 +1,4 @@
-### <a name="vagrantfile"></a> <u>Vagrantfile</u>
+## <a name="vagrantfile"></a> <u>Vagrantfile</u>
 Vagrant sử dụng file cấu hình có cú pháp là ngôn ngữ Ruby cơ bản để mô tả các môi trường được gọi là Vagrantfile. Tên của file cấu hình này phải đặt là Vagrantfile.
 
 Mỗi project, sử dụng 1 Vagrantfile để quản lý version hiệu quả, Vagrantfile hoàn toàn Flexible trên các nền tảng mà Vagrant hỗ trợ.

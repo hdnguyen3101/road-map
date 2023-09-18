@@ -1,4 +1,4 @@
-### <a name="providers"></a> <u>Providers</u>
+## <a name="providers"></a> <u>Providers</u>
 Vagrant hỗ trợ nhiều nhà cung cấp máy ảo khác nhau, nhưng các nhà cung cấp này không được cài đặt sẵn. Các nhà cung cấp này có thể được cài đặt thông qua plugin. Các nhà cung cấp được hỗ trợ bởi Vagrant bao gồm: VirtualBox, VMware, Hyper-V, Docker, AWS, Azure, Google Cloud Platform, DigitalOcean, Linode, và nhiều hơn nữa. Nhà cung cấp mặc định là Virtualbox.
 Các mức độ ưu tiên lựa chọn nhà cung cấp:
 1. Option --provider trong lệnh vagrant up.

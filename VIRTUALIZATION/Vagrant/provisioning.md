@@ -1,4 +1,4 @@
-### <a name="provisioning"></a> <u>Provisioning</u>
+## <a name="provisioning"></a> <u>Provisioning</u>
 Provisioners trong Vagrant cho phép người dùng cài đặt các phần mềm trên máy ảo và thực hiện các tác vụ cấu hình. Vagrant hỗ trợ nhiều loại provisioners khác nhau, bao gồm: shell, Chef, Puppet, Ansible, Salt, Docker, File, và một số loại provisioners khác. Provisioners có thể được cấu hình trong Vagrantfile.
 Provisioning có thể được chạy trong các trường hợp:
 - Trong quá trình khởi tạo máy ảo. Trong lần `vagrant up` đầu tiên, Vagrant sẽ chạy tất cả các provisioners được cấu hình. Nếu máy ảo đã được tạo trước đó, Vagrant sẽ bỏ qua các provisioners trừ khi được chỉ định option `--provision`. Ex: `vagrant up --provision`

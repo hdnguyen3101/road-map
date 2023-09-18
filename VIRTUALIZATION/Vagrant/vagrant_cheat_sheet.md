@@ -1,5 +1,5 @@
-### <a name="vagrant_cheat_sheet"></a> <u>Vagrant Cheat Sheet</u>
-#### <a name="cheat_sheet_cli"></a>*Vagrant CLI Cheat Sheet*
+## <a name="vagrant_cheat_sheet"></a> <u>Vagrant Cheat Sheet</u>
+### <a name="cheat_sheet_cli"></a>*Vagrant CLI Cheat Sheet*
 1. Creating the Vagrantfile
    - Khởi tạo Vagrantfile với box "base" của Vagrant 
    
@@ -101,7 +101,7 @@
    - Kiểm tra trạng thái tất cả máy ảo
    
    `vagrant global-status`
-#### <a name="cheat_sheet_file"></a>*Vagrantfile Cheat Sheet*
+### <a name="cheat_sheet_file"></a>*Vagrantfile Cheat Sheet*
 - Port forwarding
 ```ruby
 # Create a forwarded port mapping which allows access to a specific port

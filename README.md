@@ -13,33 +13,33 @@ Dựa vào những đề mục, tôi sẽ hệ thống thứ tự các kiến th
 
 - [(Optional) BitBucket](#bitbucket)
 
-2. [VIRTUALIZATION](#VIRTUALIZATION/virtualization.md)
+2. [VIRTUALIZATION](VIRTUALIZATION/virtualization.md)
 
-- [Virtualbox](#VIRTUALIZATION/Virtualbox/virtualbox.md)
+- [Virtualbox](VIRTUALIZATION/Virtualbox/virtualbox.md)
 
-- [VMware Workstation](#VIRTUALIZATION/VMware/vmware_workstation.md)
+- [VMware Workstation](VIRTUALIZATION/VMware/vmware_workstation.md)
 
-- [HyperV](#VIRTUALIZATION/Hyper-V/hyper_v.md)
+- [HyperV](VIRTUALIZATION/Hyper-V/hyper_v.md)
 
-- [Vagrant](#VIRTUALIZATION/Vagrant/vagrant.md)
+- [Vagrant](VIRTUALIZATION/Vagrant/vagrant.md)
 
-   + [Vagrant là gì?](#VIRTUALIZATION/Vagrant/vagrant_overview.md)
+   + [Vagrant là gì?](VIRTUALIZATION/Vagrant/vagrant_overview.md)
 
    + [Vagrant vs. Docker](VIRTUALIZATION/Vagrant/vagrant_vs_docker.md)
 
-   + [Kiến trúc Vagrant](#VIRTUALIZATION/Vagrant/vagrant_architecture.md)
+   + [Kiến trúc Vagrant](VIRTUALIZATION/Vagrant/vagrant_architecture.md)
 
-   + [Vagrant Commands (CLI)](#VIRTUALIZATION/Vagrant/cli.md)
+   + [Vagrant Commands (CLI)](VIRTUALIZATION/Vagrant/cli.md)
 
-   + [Vagrantfile](#VIRTUALIZATION/Vagrant/vagrantfile.md)
+   + [Vagrantfile](VIRTUALIZATION/Vagrant/vagrantfile.md)
 
-   + [Boxes](#VIRTUALIZATION/Vagrant/boxes.md)
+   + [Boxes](VIRTUALIZATION/Vagrant/boxes.md)
 
-   + [Providers](#VIRTUALIZATION/Vagrant/providers.md)
+   + [Providers](VIRTUALIZATION/Vagrant/providers.md)
 
-   + [Provisioning](#VIRTUALIZATION/Vagrant/provisioning.md)
+   + [Provisioning](VIRTUALIZATION/Vagrant/provisioning.md)
 
-   + [Vagrant Cheat Sheet](#VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md)
+   + [Vagrant Cheat Sheet](VIRTUALIZATION/Vagrant/vagrant_cheat_sheet.md)
             
       - [Vagrant CLI Cheat Sheet](#cheat_sheet_cli)
 

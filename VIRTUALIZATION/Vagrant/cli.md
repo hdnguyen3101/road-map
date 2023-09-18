@@ -1,2 +1,0 @@
-## <a name="cli"></a> <u>Vagrant Commands (CLI)</u>
-Hầu như mọi tương tác với Vagrant đều được thực hiện thông qua giao diện dòng lệnh. Gõ lệnh *vagrant* từ Commandline sẽ liệt kê tất cả lệnh được dùng. Hãy chắc chắn rằng khi thực hiện lệnh phải ở cùng thư mục với Vagrantfile.

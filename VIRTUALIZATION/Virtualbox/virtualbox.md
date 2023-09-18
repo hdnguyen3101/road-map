@@ -1,0 +1,2 @@
+## <a name="virtualbox"></a>***Virtualbox***
+Virutalbox là phần mềm ảo hóa Open-source dành cho kiến trúc x86 và AMD64/Intel64. Virtualbox chạy được trên các nền tảng Windows, Linux, MacOS (tại thời điểm viết bài này, Virtualbox chưa hỗ trợ trên các thiết bị sử dụng Chip M1) 26 thg 8, 2023.

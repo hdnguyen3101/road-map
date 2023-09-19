@@ -6,7 +6,7 @@
 
 Dựa vào những đề mục, tôi sẽ hệ thống thứ tự các kiến thức cần học để đạt hiệu quả tiếp thu tốt nhất cho những người mới bắt đầu theo danh mục sau:
 
- **Table of content:**
+**Table of content:**
 1. [SOURCE VERSION CONTROL](#svc)
 
 - [Git](#git)
@@ -110,12 +110,6 @@ Dựa vào những đề mục, tôi sẽ hệ thống thứ tự các kiến th
 ## <a name="svc"></a>**1.SOURCE VERSION CONTROL**
 - ### <a name="git"></a>***Git***
 - ### <a name="bitbucket"></a>***(Optional) BitBucket***
-
-- ### <a name="hyper_v"></a>***HyperV***
-
-- ### <a name="vmware-vsphere"></a>***(Advanced) VMware vSphere***
-
-
 
 ## <a name="containerization"></a>**3.CONTAINERIZATION**
 - ### <a name="docker"></a>***Docker***
